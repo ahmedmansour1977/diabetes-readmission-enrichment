@@ -7,4 +7,3 @@ lightgbm
 imbalanced-learn
 matplotlib
 shap
-pyreadstat
