@@ -14,8 +14,10 @@ improves individual-level readmission prediction.
 ## Repository layout
 
 ```
-code/                        analysis scripts (01_* through 16_*)
-revision_analyses/           notebooks and outputs added during revision
+code/                        analysis scripts (01_* through 15_*)
+16_factorial_multiseed.py    multi-seed factorial, run alongside the code/ scripts
+*_colab.ipynb                self-contained notebooks for the revision analyses
+*.txt, *.csv, *.png          outputs of those analyses
 DATA/                        raw and processed data (NOT tracked - see "Data" below)
 results/                     generated tables and figures (NOT tracked)
 README.md
@@ -76,7 +78,7 @@ setx ENRICHMENT_BASE "path\to\project\root"
 | 14 | `code/13_leakage_factorial.py` | Figure 2b (leakage decomposition) |
 | 15 | `code/14_subgroup_fairness.py` | Figure 7, subgroup table |
 | 16 | `code/15_operating_characteristics.py` | Table 8, Figure 8 |
-| 17 | `code/16_factorial_multiseed.py` | multi-seed factorial (Additional file 4) |
+| 17 | `16_factorial_multiseed.py` | multi-seed factorial (Additional file 4) |
 
 `code/02_train_evaluate_v2.py` and `code/05_make_figures.py` are retained for completeness
 but are superseded by later scripts and are not part of the reported results. All
@@ -84,12 +86,21 @@ stochastic steps use a fixed random seed (42).
 
 ## Revision analyses
 
-Analyses added in response to peer review are in `revision_analyses/`, with a summary of
-what each shows in `README_revision_analyses.md`. They cover the multi-seed factorial
-replication, calibration slope and calibration-in-the-large, a within-fold SMOTE
-comparison, subgroup contrast tests, decision curve analysis, a first-encounter sensitivity
-analysis, the decomposition separating training contamination from evaluation on synthetic
-observations, and distributional (mean + SD) enrichment.
+Analyses added in response to peer review are in the repository root alongside the `code/`
+folder, with a summary of what each shows in `README_revision_analyses.md`. They cover the
+multi-seed factorial replication, calibration slope and calibration-in-the-large, a
+within-fold SMOTE comparison, subgroup contrast tests, decision curve analysis, a
+first-encounter sensitivity analysis, the decomposition separating training contamination
+from evaluation on synthetic observations, and distributional (mean + SD) enrichment.
+
+| Notebook | What it computes |
+|---|---|
+| `factorial_multiseed_colab.ipynb` | 2x2 factorial across 11 random seeds |
+| `leakage_mechanism_colab.ipynb` | Contamination vs evaluation on synthetic rows |
+| `calibration_slope_colab.ipynb` | Calibration slope and calibration-in-the-large |
+| `subgroup_and_fifthcell_colab.ipynb` | Within-fold SMOTE cell; subgroup contrasts |
+| `optional_analyses_colab.ipynb` | Decision curve; first-encounter set; SMOTE neighbourhood |
+| `distributional_enrichment_fixed_colab.ipynb` | Mean vs mean + SD enrichment, cohort fixed |
 
 The notebooks are self-contained: each rebuilds the cohort from the public UCI dataset and
 asserts that it matches the manuscript (98,490 encounters, 69,311 patients, 11,271 events,
