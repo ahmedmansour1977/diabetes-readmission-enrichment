@@ -1,0 +1,21 @@
+environment: xgboost 3.2.0, sklearn 1.8.0, GPU True
+
+DISTRIBUTIONAL ENRICHMENT, COHORT HELD FIXED
+  baseline     AUROC 0.6696  (155 features, n=98490, events=11271)
+  SD only      AUROC 0.6689  (158 features, n=98490, events=11271)
+  mean only    AUROC 0.6687  (164 features, n=98490, events=11271)
+  mean + SD    AUROC 0.6682  (167 features, n=98490, events=11271)
+
+configuration  delta_auroc  ci_low  ci_high     p
+      SD only      -0.0007 -0.0014   0.0000 0.060
+    mean only      -0.0009 -0.0018   0.0001 0.078
+    mean + SD      -0.0014 -0.0024  -0.0004 0.004
+
+dispersion columns (3): ['BMXBMI_mean_SD', 'Average_BPXSY_mean_SD', 'LBXGH_mean_SD']
+distinct values per dispersion column on the current cohort:
+  BMXBMI_mean_SD: 24
+  Average_BPXSY_mean_SD: 24
+  LBXGH_mean_SD: 23
+
+NOTE: only three measures have dispersion available (BMI, systolic blood pressure,
+glycated haemoglobin), so this is a partial test of distributional enrichment.

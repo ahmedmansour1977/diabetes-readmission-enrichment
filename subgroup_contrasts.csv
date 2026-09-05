@@ -1,0 +1,11 @@
+family,contrast,diff,lo,hi,p,p_holm,significant
+Age,Age 20-39 vs Age 40-59,0.0639,0.0318,0.0908,0.001,0.003,yes
+Age,Age 20-39 vs Age >=60,0.1105,0.0807,0.1364,0.001,0.003,yes
+Age,Age 40-59 vs Age >=60,0.0465,0.032,0.0607,0.001,0.003,yes
+Sex,Sex Male vs Sex Female,-0.0033,-0.0163,0.0086,0.532,0.532,no
+Race,Race Hispanic vs Race Caucasian,0.064,0.0221,0.1025,0.004,0.02,yes
+Race,Race Hispanic vs Race African American,0.0647,0.0213,0.1073,0.002,0.012,yes
+Race,Race Hispanic vs Race Asian/Other,0.0577,0.0081,0.1051,0.016,0.064,no
+Race,Race Caucasian vs Race African American,0.0008,-0.014,0.0165,0.914,1.0,no
+Race,Race Caucasian vs Race Asian/Other,-0.0063,-0.0354,0.0232,0.66,1.0,no
+Race,Race African American vs Race Asian/Other,-0.0071,-0.039,0.0278,0.61,1.0,no

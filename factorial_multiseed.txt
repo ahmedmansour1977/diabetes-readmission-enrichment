@@ -1,0 +1,14 @@
+FACTORIAL ACROSS 11 SEEDS: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 42]
+environment: xgboost 3.2.0, sklearn 1.8.0, imblearn 0.14.1, GPU True
+
+quantity                                    mean        SD       min       max
+correct protocol (D)                     +0.6703    0.0006   +0.6692   +0.6711
+encounter-level only (B)                 +0.6701    0.0006   +0.6691   +0.6711
+pre-split SMOTE only (A)                 +0.9562    0.0001   +0.9560   +0.9564
+both, leaky protocol (C)                 +0.9562    0.0001   +0.9561   +0.9563
+main effect: encounter-level split       -0.0001    0.0002   -0.0005   +0.0003
+main effect: pre-split SMOTE             +0.2860    0.0006   +0.2850   +0.2868
+interaction                              +0.0002    0.0004   -0.0005   +0.0011
+
+PASTE-READY SENTENCE:
+  Across 11 random seeds the main effect of pre-split resampling was +0.2860 (SD 0.0006; range +0.2850 to +0.2868) and that of encounter-level splitting was -0.0001 (SD 0.0002; range -0.0005 to +0.0003); the ordering of the two effects was identical in every seed.

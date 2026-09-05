@@ -1,0 +1,20 @@
+environment: xgboost 3.2.0, sklearn 1.8.0, GPU True
+
+A. DECISION CURVE
+ threshold  net_benefit_model  net_benefit_treat_all  net_benefit_treat_none  interventions_avoided_per_100
+      0.10            0.03423                0.01604                     0.0                           16.4
+      0.15            0.01592               -0.04184                     0.0                           32.7
+      0.20            0.00886               -0.10695                     0.0                           46.3
+      0.25            0.00490               -0.18075                     0.0                           55.7
+      0.30            0.00284               -0.26509                     0.0                           62.5
+  model has the highest net benefit from threshold 0.010 to 0.505
+
+B. FIRST-ENCOUNTER SENSITIVITY
+  69311 encounters, 6257 events, prevalence 0.0903
+  AUROC 0.6517 vs 0.6696 on the full cohort (-0.0179)
+
+C. SMOTE NEIGHBOUR SENSITIVITY
+ k_neighbors  auroc  inflation
+           1 0.9558     0.2862
+           5 0.9560     0.2865
+          15 0.9564     0.2869

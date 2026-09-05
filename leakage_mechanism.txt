@@ -1,0 +1,12 @@
+environment: xgboost 3.2.0, sklearn 1.8.0, GPU True
+
+A. DECOMPOSING THE SMOTE INFLATION
+  correct protocol                          0.6696
+  pre-split SMOTE, all rows scored          0.9560  (+0.2865)
+  pre-split SMOTE, real encounters only     0.6682  (-0.0014)
+  share of inflation from contamination     -0.5%
+  share from scoring on synthetic rows      100.5%
+
+B. ENRICHMENT UNDER EACH PROTOCOL
+  correct: baseline 0.6696 vs enriched 0.6687 (-0.0009)
+  leaky:   baseline 0.9561 vs enriched 0.9563 (+0.0002)
