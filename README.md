@@ -12,20 +12,17 @@ NHANES population-level physiological proxies (computed as deterministic stratum
 improves individual-level readmission prediction.
 
 ## Repository layout
-
-```
-code/                        analysis scripts (01_* through 15_*)
-16_factorial_multiseed.py    multi-seed factorial, run alongside the code/ scripts
-*_colab.ipynb                self-contained notebooks for the revision analyses
-*.txt, *.csv, *.png          outputs of those analyses
-DATA/                        raw and processed data (NOT tracked - see "Data" below)
-results/                     generated tables and figures (NOT tracked)
+code/ analysis scripts (01_* through 15_*)
+16_factorial_multiseed.py multi-seed factorial, run alongside the code/ scripts
+*_colab.ipynb self-contained notebooks for the revision analyses
+*.txt, *.csv, *.png outputs of those analyses
+DATA/ raw and processed data (NOT tracked - see "Data" below)
+results/ generated tables and figures (NOT tracked)
 README.md
-README_revision_analyses.md  what the revision analyses show
+README_revision_analyses.md what the revision analyses show
 requirements.txt
 versions.txt
 .gitignore
-```
 
 `DATA/` and `results/` are created at run time and are excluded by `.gitignore`.
 
@@ -42,10 +39,7 @@ Download them and place the raw files under `DATA/` (see the paths at the top of
 ## Environment
 
 Python 3.11. Install dependencies with:
-
-```
 pip install -r requirements.txt
-```
 
 Exact versions used for the reported results are in `versions.txt` (xgboost 3.2.0,
 scikit-learn 1.8.0, imbalanced-learn 0.14.1, GPU enabled).
@@ -53,10 +47,7 @@ scikit-learn 1.8.0, imbalanced-learn 0.14.1, GPU enabled).
 Scripts locate the project root through the `ENRICHMENT_BASE` environment variable, and
 otherwise fall back to the parent of the `code/` folder. Set it to the project root (the
 folder that contains `code/` and `DATA/`). On Windows:
-
-```
 setx ENRICHMENT_BASE "path\to\project\root"
-```
 
 ## Run order
 
