@@ -1,0 +1,26 @@
+environment: xgboost 3.2.0, sklearn 1.8.0, GPU True
+
+A. SANITY CHECK AGAINST THE PUBLISHED VALUES
+  AUROC  0.6696   published 0.671
+  Brier  0.2201   published 0.220
+  ECE    0.3430   published 0.343
+  MCE    0.4513   published 0.449
+
+B. CALIBRATION OF THE MODEL AS REPORTED
+  calibration slope        1.0260   (ideal 1)
+    intercept of that fit  -2.0061
+  calibration-in-the-large -2.0038   (ideal 0)
+  mean predicted risk      0.4574   observed 0.1144
+  scale_pos_weight         7.7384  -> log-odds offset 2.0462
+  patient-clustered bootstrap, 500 successful resamples of patients
+  calibration slope        1.026 (95% CI 0.993 to 1.062)
+  calibration-in-the-large -2.004 (95% CI -2.025 to -1.982)
+
+C. AFTER WITHIN-TRAINING-FOLD RECALIBRATION
+  variant        AUROC   Brier     ECE   slope     CITL
+  as reported   0.6696  0.2201  0.3430   1.026   -2.004
+  Platt         0.6677  0.0968  0.0013   0.993   +0.000
+  isotonic      0.6668  0.0969  0.0022   0.896   -0.001
+
+D. PASTE-READY SENTENCE
+  The model as reported had a calibration slope of 1.03 (95% CI 0.99 to 1.06) and calibration-in-the-large of -2.00 (95% CI -2.02 to -1.98), confirming that class weighting displaces predicted probabilities upward relative to the 11.4% prevalence without destroying the ordering. After within-training-fold Platt recalibration the slope was 0.99 and calibration-in-the-large +0.00.
