@@ -19,11 +19,12 @@ script 01.
 | `leakage_mechanism_colab.ipynb` | Contamination vs synthetic-test-set decomposition |
 | `distributional_enrichment_fixed_colab.ipynb` | Mean vs mean+SD enrichment, cohort held fixed |
 | `factorial_multiseed.txt` / `.csv` | 11-seed factorial output |
+| `calibration_slope.txt` / `.csv` | Calibration slope, CITL, and the recalibration table |
 | `subgroup_and_fifthcell.txt`, `subgroup_contrasts.csv` | Within-fold SMOTE result; subgroup contrasts |
 | `optional_analyses.txt` | Decision curve, first-encounter, SMOTE k |
 | `leakage_mechanism.txt` | Contamination decomposition |
 | `distributional_enrichment_fixed.txt` | Distributional enrichment |
-| `fig9_decision_curve.png` | Figure 9 |
+| `fig9_decision_curve.png` | Decision curve |
 
 ## Headline results
 
@@ -57,12 +58,18 @@ means and SD together -0.0014 (P=.004). Dispersion adds nothing.
 Upload to Google Colab, set Runtime > Change runtime type > T4 GPU, then Run all. Each
 notebook rebuilds the cohort from the public dataset and asserts it matches the manuscript
 (98,490 encounters, 69,311 patients, 11,271 events, 155 encoded predictors) before computing
-anything.
+anything. Each writes its output to a `.txt` (and, where applicable, `.csv`) file and
+downloads it; those outputs are committed here.
 
 ## Environment
 
-Produced with xgboost 3.2.0, scikit-learn 1.8.0 and imbalanced-learn 0.14.1 on a GPU,
-matching `versions.txt`. The Brier score and calibration error reproduced the primary values
-exactly; the corresponding AUROC differed by about 0.0011, which is noted in the manuscript
-wherever these results appear. Expect differences of that order between GPU models and
-package builds.
+These analyses were produced on Google Colab with a T4 GPU using xgboost 3.2.0, scikit-learn
+1.8.0 and imbalanced-learn 0.14.1. The primary analysis under `code/` was run on a local
+workstation; `versions.txt` is a freeze of that environment (xgboost 3.2.0, scikit-learn
+1.7.2, imbalanced-learn 0.14.2). The two differ slightly, and the manuscript discloses this
+wherever the affected quantities appear.
+
+Across the two environments, three of the four factorial cells reproduced exactly and the
+fourth differed by 0.0011 AUROC. For the calibration analyses the Brier score and calibration
+error reproduced the primary values exactly, while the corresponding AUROC differed by 0.0015.
+Expect differences of that order between GPU models and package builds.
