@@ -1,0 +1,8 @@
+variant,auroc,brier,ece,slope,citl
+as reported,0.6696,0.2201,0.3430,1.0260,-2.0038
+Platt,0.6677,0.0968,0.0013,0.9934,0.0000
+isotonic,0.6668,0.0969,0.0022,0.8962,-0.0007
+
+quantity,estimate,ci_low,ci_high
+calibration_slope,1.0260,0.9933,1.0615
+calibration_in_the_large,-2.0038,-2.0247,-1.9824
