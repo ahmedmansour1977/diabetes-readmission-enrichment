@@ -7,3 +7,4 @@ lightgbm
 imbalanced-learn
 matplotlib
 shap
+ucimlrepo

@@ -1,4 +1,7 @@
-# Revision analyses
+# Revision analyses (earlier submissions)
+
+The notebooks are in `notebooks/`, the multi-seed script is `code/16_factorial_multiseed.py`, and
+the output files listed below are in this folder.
 
 Analyses added to the manuscript in response to peer review. These supplement the original
 pipeline in `code/` (scripts 01 to 15) and replace none of it.
@@ -11,13 +14,13 @@ script 01.
 
 | File | What it is |
 |---|---|
-| `16_factorial_multiseed.py` | Multi-seed factorial, for the local pipeline |
-| `factorial_multiseed_colab.ipynb` | Same, self-contained for Colab |
-| `calibration_slope_colab.ipynb` | Calibration slope and calibration-in-the-large |
-| `subgroup_and_fifthcell_colab.ipynb` | Within-fold SMOTE cell; subgroup contrast tests |
-| `optional_analyses_colab.ipynb` | Decision curve; first-encounter set; SMOTE neighbourhood |
-| `leakage_mechanism_colab.ipynb` | Contamination vs synthetic-test-set decomposition |
-| `distributional_enrichment_fixed_colab.ipynb` | Mean vs mean+SD enrichment, cohort held fixed |
+| `code/16_factorial_multiseed.py` | Multi-seed factorial, for the local pipeline |
+| `notebooks/factorial_multiseed_colab.ipynb` | Same, self-contained for Colab |
+| `notebooks/calibration_slope_colab.ipynb` | Calibration slope and calibration-in-the-large |
+| `notebooks/subgroup_and_fifthcell_colab.ipynb` | Within-fold SMOTE cell; subgroup contrast tests |
+| `notebooks/optional_analyses_colab.ipynb` | Decision curve; first-encounter set; SMOTE neighbourhood |
+| `notebooks/leakage_mechanism_colab.ipynb` | Contamination vs synthetic-test-set decomposition |
+| `notebooks/distributional_enrichment_fixed_colab.ipynb` | Mean vs mean+SD enrichment, cohort held fixed |
 | `factorial_multiseed.txt` / `.csv` | 11-seed factorial output |
 | `calibration_slope.txt` / `.csv` | Calibration slope, CITL, and the recalibration table |
 | `subgroup_and_fifthcell.txt`, `subgroup_contrasts.csv` | Within-fold SMOTE result; subgroup contrasts |

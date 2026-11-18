@@ -1,84 +1,83 @@
-# Leakage-Controlled Benchmark and Evaluation-Bias Decomposition, Diabetes 130-US Hospitals
+# Oversampling before the split: two routes to inflated performance
 
-Analysis code for the study *"Pre-split resampling inflates reported performance by replacing the
-evaluation target rather than by contaminating training: a factorial decomposition of evaluation
-bias on the Diabetes 130-US Hospitals readmission benchmark"* (under review).
+Analysis code for the study *"Oversampling before data splitting inflates clinical prediction performance through two separable routes: information leakage and recognisable synthetic test records"* (submitted).
 
-The code reproduces a leakage-controlled benchmark for 30-day readmission on the UCI Diabetes
-130-US Hospitals dataset, decomposes the contributions of encounter-level splitting and pre-split
-resampling to reported performance inflation, separates training contamination from evaluation
-against synthetic observations, and tests whether enriching the dataset with NHANES
-population-level physiological proxies (computed as deterministic stratum means) improves
-individual-level prediction.
+When SMOTE is applied to a whole dataset before it is split into training and test folds, reported
+performance is inflated. This repository separates the two routes by which that happens:
+**information leakage** into training, and **synthetic records in the test set** that the model learns
+to recognise. The reported AUROC is split exactly into the part earned on real records and the part
+earned on created ones:
 
-Headline result: holding model, hyperparameters, feature matrix and random seed fixed, pre-split
-resampling raised AUROC from 0.671 to 0.956 while encounter-level splitting alone changed it by
--0.0015. Rescoring the identical contaminated model on the real encounters alone recovered 0.668,
-so essentially the whole effect came from grading the model on a half-synthetic test fold.
+    AUROC_pooled = (1 - pi_new) * AUROC_real + pi_new * AUROC_new
+
+**Headline result** (Diabetes 130-US Hospitals, 98,490 encounters, gradient-boosted trees): SMOTE
+before the split raised the AUROC from 0.670 to 0.957. On real held-out patients the
+contaminated model scored 0.668; on synthetic records it scored 1.000. Applying SMOTE
+separately to the training and test folds, so that nothing could leak, still gave 0.957.
+Splitting by encounter instead of by patient changed the AUROC by less than 0.001. Six further public
+clinical datasets and a simulation show when each route dominates.
 
 ## Repository layout
 
 ```
-code/                         analysis scripts (01_* through 15_*)
-16_factorial_multiseed.py     multi-seed factorial, run alongside the code/ scripts
-*_colab.ipynb                 self-contained notebooks for the revision analyses
-*.txt, *.csv, *.png           outputs of those analyses
-DATA/                         raw and processed data (NOT tracked - see "Data" below)
-results/                      generated tables and figures (NOT tracked)
-README.md
-README_revision_analyses.md   what the revision analyses show
-requirements.txt
-versions.txt
-.gitignore
+code/
+  01_* to 15_*                  original pipeline (cohort, benchmark, enrichment, factorial)
+  16_factorial_multiseed.py     2x2 factorial across 11 seeds
+  mech.py, 17_* to 20_*         decomposition, probes, replication, simulation, figures
+  README_scripts_17-20.md       what scripts 17 to 20 do and how to run them
+notebooks/
+  verify_scirep_colab.ipynb     one-click Colab run of scripts 17-19 with a check of every value
+  *_colab.ipynb                 self-contained notebooks for the earlier revision analyses
+outputs/
+  scirep/                       results reported in the manuscript (scripts 17-20)
+  scirep_reproduction/          independent second run, and the comparison of the two
+  revision_analyses/            outputs of the earlier notebooks, with their own README
+DATA/                           raw and processed data (not tracked)
+results/                        run-time output (not tracked)
 ```
-
-`DATA/` and `results/` are created at run time and are excluded by `.gitignore`.
 
 ## Data
 
-The datasets are public and are **not** redistributed in this repository:
+All data are public and are **not** redistributed here.
 
-- UCI Diabetes 130-US Hospitals (1999-2008): https://archive.ics.uci.edu/dataset/296
-  (doi:10.24432/C5230J)
-- NHANES (1999-2010), CDC/NCHS: https://www.cdc.gov/nchs/nhanes/
+- Diabetes 130-US Hospitals (1999-2008), UCI Machine Learning Repository: https://doi.org/10.24432/C5230J
+- Six replication datasets (CDC Diabetes Health Indicators, AIDS Clinical Trials Group Study 175,
+  Thoracic Surgery, Heart Failure Clinical Records, Cardiotocography, Mammography), downloaded
+  automatically by `code/18a_fetch_datasets.py` from UCI and OpenML
+- NHANES (1999-2010), CDC/NCHS, used only by the earlier enrichment analyses: https://www.cdc.gov/nchs/nhanes/
 
-Download them and place the raw files under `DATA/` (see the paths at the top of
-`code/01_build_datasets_v2.py`).
+Place the raw UCI files under `DATA/` (paths at the top of `code/01_build_datasets_v2.py`).
 
-## Environment
-
-Python 3.11. Install dependencies with:
+## Reproducing the manuscript
 
 ```
 pip install -r requirements.txt
+python code/01_build_datasets_v2.py          # writes DATA/processed/uci_baseline.csv
+python code/16_factorial_multiseed.py 1 2 3 4 5 6 7 8 9 10 42
 ```
 
-Two environments were used, and they differ slightly. This is deliberate and is disclosed in the
-manuscript wherever the affected quantities appear.
+then scripts 17 to 20 as described in `code/README_scripts_17-20.md`. Or open
+`notebooks/verify_scirep_colab.ipynb` in Google Colab, upload `uci_baseline.csv` and choose Run all.
 
-| | Primary analysis | Revision analyses |
-|---|---|---|
-| Where | Local workstation | Google Colab, T4 GPU |
-| What | Everything under `code/` | The `*_colab.ipynb` notebooks |
-| xgboost | 3.2.0 | 3.2.0 |
-| scikit-learn | 1.7.2 | 1.8.0 |
-| imbalanced-learn | 0.14.2 | 0.14.1 |
+| Results | Environment |
+|---|---|
+| Factorial (scripts 13, 16) | Google Colab GPU; xgboost 3.2.0, scikit-learn 1.8.0, imbalanced-learn 0.14.1 |
+| Scripts 17-19 (`outputs/scirep/`) | Google Colab CPU; Python 3.13, xgboost 3.4.1, scikit-learn 1.6.1, imbalanced-learn 0.14.2 |
+| Reproduction (`outputs/scirep_reproduction/`) | as above but scikit-learn 1.9.1 |
 
-`versions.txt` is a full freeze of the **primary** environment. Three of the four factorial cells
-reproduced exactly across the two environments and the fourth differed by 0.0011 AUROC; for the
-calibration analyses the Brier score and calibration error reproduced exactly while the
-corresponding AUROC differed by 0.0015. Expect differences of that order between GPU models and
-package builds.
+The two runs of scripts 17-19 agreed on 236 of 270 values to within 0.005 and on all values to
+within 0.03; the larger differences are confined to ACTG 175, Heart Failure and Thoracic Surgery and to simulated
+samples of 1,000 records.
 
-Scripts locate the project root through the `ENRICHMENT_BASE` environment variable, and otherwise
-fall back to the parent of the `code/` folder. Set it to the project root (the folder that contains
-`code/` and `DATA/`). On Windows:
+## Earlier analyses
 
-```
-setx ENRICHMENT_BASE "path\to\project\root"
-```
+`code/01_*` to `code/15_*` and the notebooks other than `verify_scirep_colab.ipynb` belong to earlier
+versions of the study, which also tested NHANES-based enrichment. They are kept unchanged as the
+record of that work. `versions.txt` is a freeze of the local environment used for `code/`, and
+`outputs/revision_analyses/README.md` summarises the revision analyses. All stochastic steps use
+fixed random seeds.
 
-## Run order
+### Run order (earlier analyses)
 
 Outputs are described by what they contain rather than by table or figure number, so that this
 table does not go stale as the manuscript is renumbered between submissions.
@@ -101,29 +100,11 @@ table does not go stale as the manuscript is renumbered between submissions.
 | 14 | `code/13_leakage_factorial.py` | 2x2 factorial decomposition |
 | 15 | `code/14_subgroup_fairness.py` | subgroup discrimination and table |
 | 16 | `code/15_operating_characteristics.py` | capacity-based operating characteristics |
-| 17 | `16_factorial_multiseed.py` | multi-seed factorial |
+| 17 | `code/16_factorial_multiseed.py` | multi-seed factorial |
 
 `code/02_train_evaluate_v2.py` and `code/05_make_figures.py` are retained for completeness but are
 superseded by later scripts and are not part of the reported results. All stochastic steps use a
 fixed random seed (42).
-
-## Revision analyses
-
-Analyses added in response to peer review are in the repository root alongside the `code/` folder,
-with a summary of what each shows in `README_revision_analyses.md`.
-
-| Notebook | What it computes | Output |
-|---|---|---|
-| `factorial_multiseed_colab.ipynb` | 2x2 factorial across 11 random seeds | `factorial_multiseed.txt`, `.csv` |
-| `leakage_mechanism_colab.ipynb` | Contamination versus evaluation on synthetic rows | `leakage_mechanism.txt` |
-| `calibration_slope_colab.ipynb` | Calibration slope and calibration-in-the-large | `calibration_slope.txt`, `.csv` |
-| `subgroup_and_fifthcell_colab.ipynb` | Within-fold SMOTE cell; subgroup contrasts | `subgroup_and_fifthcell.txt`, `subgroup_contrasts.csv` |
-| `optional_analyses_colab.ipynb` | Decision curve; first-encounter set; SMOTE neighbourhood | `optional_analyses.txt`, `fig9_decision_curve.png` |
-| `distributional_enrichment_fixed_colab.ipynb` | Mean versus mean + SD enrichment, cohort fixed | `distributional_enrichment_fixed.txt` |
-
-The notebooks are self-contained: each rebuilds the cohort from the public UCI dataset and asserts
-that it matches the manuscript (98,490 encounters, 69,311 patients, 11,271 events, 155 encoded
-predictors) before computing anything. Run them in Google Colab with a GPU runtime.
 
 ## License
 
