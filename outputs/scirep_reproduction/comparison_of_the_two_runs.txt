@@ -1,0 +1,45 @@
+verdict
+same                236
+small difference     31
+DIFFERENT             3 
+
+Items that are not the same:
+                                                                  item  manuscript  yours  difference          verdict
+                     actg175|lr|postsplit_both_separately|auroc_pooled      0.7107 0.7028     -0.0079 small difference
+                       actg175|lr|postsplit_both_separately|auroc_real      0.6965 0.6903     -0.0062 small difference
+                        actg175|lr|postsplit_both_separately|auroc_new      0.7174 0.7088     -0.0086 small difference
+                      actg175|xgb|postsplit_both_separately|auroc_real      0.6649 0.6583     -0.0066 small difference
+                                    heart_failure|lr|none|auroc_pooled      0.7677 0.7586     -0.0091 small difference
+                                      heart_failure|lr|none|auroc_real      0.7677 0.7586     -0.0091 small difference
+                 heart_failure|lr|postsplit_both_separately|auroc_real      0.7665 0.7539     -0.0126 small difference
+                  heart_failure|lr|postsplit_both_separately|auroc_new      0.7831 0.7905      0.0074 small difference
+                heart_failure|xgb|postsplit_both_separately|auroc_real      0.7420 0.7356     -0.0064 small difference
+                                    heart_failure|xgb|ros|auroc_pooled      0.8538 0.8631      0.0093 small difference
+                                      heart_failure|xgb|ros|auroc_real      0.8271 0.8344      0.0073 small difference
+                                       heart_failure|xgb|ros|auroc_new      0.8777 0.8887      0.0110 small difference
+                                         thoracic|lr|none|auroc_pooled      0.6535 0.6431     -0.0104 small difference
+                                           thoracic|lr|none|auroc_real      0.6535 0.6431     -0.0104 small difference
+                    thoracic|lr|postsplit_both_separately|auroc_pooled      0.6442 0.6174     -0.0268        DIFFERENT
+                      thoracic|lr|postsplit_both_separately|auroc_real      0.6393 0.6184     -0.0209        DIFFERENT
+                       thoracic|lr|postsplit_both_separately|auroc_new      0.6453 0.6172     -0.0281        DIFFERENT
+                                          thoracic|lr|ros|auroc_pooled      0.7540 0.7605      0.0065 small difference
+                                            thoracic|lr|ros|auroc_real      0.7429 0.7479      0.0050 small difference
+                                             thoracic|lr|ros|auroc_new      0.7564 0.7631      0.0067 small difference
+                                        thoracic|xgb|none|auroc_pooled      0.5878 0.6016      0.0138 small difference
+                                          thoracic|xgb|none|auroc_real      0.5878 0.6016      0.0138 small difference
+                   thoracic|xgb|postsplit_both_separately|auroc_pooled      0.8954 0.9082      0.0128 small difference
+                      thoracic|xgb|postsplit_both_separately|auroc_new      0.9539 0.9699      0.0160 small difference
+                                           thoracic|xgb|ros|auroc_real      0.8972 0.9062      0.0090 small difference
+                          simulation_binary_n1000|xgb|smote|auroc_real      0.7127 0.7179      0.0052 small difference
+ simulation_continuous_n1000|lr|postsplit_both_separately|auroc_pooled      0.6704 0.6603     -0.0101 small difference
+    simulation_continuous_n1000|lr|postsplit_both_separately|auroc_new      0.6724 0.6616     -0.0108 small difference
+                     simulation_continuous_n1000|xgb|none|auroc_pooled      0.6004 0.6107      0.0103 small difference
+                       simulation_continuous_n1000|xgb|none|auroc_real      0.6004 0.6107      0.0103 small difference
+simulation_continuous_n1000|xgb|postsplit_both_separately|auroc_pooled      0.7115 0.7174      0.0059 small difference
+  simulation_continuous_n1000|xgb|postsplit_both_separately|auroc_real      0.5956 0.6006      0.0050 small difference
+   simulation_continuous_n1000|xgb|postsplit_both_separately|auroc_new      0.7267 0.7327      0.0060 small difference
+                      simulation_continuous_n1000|xgb|smote|auroc_real      0.9176 0.9103     -0.0073 small difference
+
+VERDICT: send verify_comparison.csv to Claude before submitting.
+
+Saved: /content/SciRep_verify/verify_comparison.csv

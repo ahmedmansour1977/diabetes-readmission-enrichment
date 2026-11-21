@@ -1,0 +1,56 @@
+{
+ "thoracic": {
+  "n": 470,
+  "events": 70,
+  "prevalence": 0.14893617021276595,
+  "p": 27,
+  "integer_cols": 25,
+  "binary_cols": 24,
+  "share_new_rows_off_support": 0.9878787878787879
+ },
+ "heart_failure": {
+  "n": 299,
+  "events": 96,
+  "prevalence": 0.3210702341137124,
+  "p": 11,
+  "integer_cols": 8,
+  "binary_cols": 5,
+  "share_new_rows_off_support": 1.0
+ },
+ "actg175": {
+  "n": 2139,
+  "events": 521,
+  "prevalence": 0.24357176250584386,
+  "p": 18,
+  "integer_cols": 17,
+  "binary_cols": 10,
+  "share_new_rows_off_support": 1.0
+ },
+ "ctg": {
+  "n": 2126,
+  "events": 176,
+  "prevalence": 0.08278457196613359,
+  "p": 21,
+  "integer_cols": 13,
+  "binary_cols": 0,
+  "share_new_rows_off_support": 0.9937993235625705
+ },
+ "mammography": {
+  "n": 11183,
+  "events": 260,
+  "prevalence": 0.023249575248144506,
+  "p": 6,
+  "integer_cols": 0,
+  "binary_cols": 0,
+  "share_new_rows_off_support": 0.0
+ },
+ "cdc_dhi": {
+  "n": 253680,
+  "events": 35346,
+  "prevalence": 0.13933301797540207,
+  "p": 21,
+  "integer_cols": 21,
+  "binary_cols": 14,
+  "share_new_rows_off_support": 0.9967484206614642
+ }
+}

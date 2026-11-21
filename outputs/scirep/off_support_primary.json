@@ -1,0 +1,8 @@
+{
+ "n_new": 75948,
+ "n_integer_cols": 155,
+ "n_cols": 155,
+ "share_rows_off_support": 1.0,
+ "median_off_support_features": 15.0,
+ "share_real_rows_off_support": 0.0
+}
